@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_background_1280">
+
+        <Button
+            android:id="@+id/btnVoice"
+
+            android:layout_width="216dp"
+            android:layout_height="216dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/group_2012"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/text_assistant"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="12sp"
+            android:maxHeight="66dp"
+            android:paddingHorizontal="20dp"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnVoice"
+            tools:text="Hi" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

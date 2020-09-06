@@ -1,0 +1,46 @@
+package ai.kitt.vnest.util.common;
+
+public final class Config {
+    public static final String ACTION_MUSIC_COMMAND = "com.android.music.musicservicecommand";
+    public static final String ACTION_SHOW_SMS = "action.show_sms";
+    public static final String CMD_MUSIC_NEXT = "next";
+    public static final String CMD_MUSIC_PAUSE = "pause";
+    public static final String CMD_MUSIC_PLAY = "play";
+    public static final String CMD_MUSIC_PREV = "previous";
+    public static final String CONTENT_AUTHORITY = "com.haoke.provider.pbprovider";
+    public static final String FLAVOR_BRAVIGO = "bravigo";
+    public static final String FLAVOR_DONGA = "donga";
+    public static final String FLAVOR_JOYING = "joying";
+    public static final String JOYING_MODEL = "sp9853i_1h10_vmm";
+    public static final String LANG_RU = "ru";
+    public static final String LANG_VI = "vi";
+    public static final String NOTIFICATION_ID = "auto_assistant";
+    public static final String PERM_SYSTEM_ALERT_WINDOW = "android.permission.SYSTEM_ALERT_WINDOW";
+    public static final String PHONE_BOOK_TBL = "pb_table";
+    public static final String PLATFORM = "Android";
+    public static final int PLAYER_NOTIFICATION_ID = 1001;
+    public static final String PREF_NAME = "auto_assistant";
+    public static final String ROOT_DIR = "AutoAssistant";
+    public static final String RUSSIA_MODEL = "ru";
+    public static final String RU_FEMALE_VOICE = "ru-ru-x-dfc#female_3-local";
+    public static final String RU_MALE_VOICE = "ru-ru-x-dfc#male_3-local";
+    public static final String RU_RU = "ru";
+    public static final int SMS_NOTIFICATION_ID = 1002;
+    public static final String SYU_ACTION_SPLIT = "com.syu.voice.splitscreen";
+    public static final String TEYES_MODEL = "teyes";
+    public static final String US_EN = "en";
+    public static final String VIETNAM_MODEL = "vi";
+    public static final String VI_FEMALE_VOICE = "vi-vn-x-vic-local";
+    public static final String VI_MALE_VOICE = "vi-vn-x-vic-local";
+    public static final String VI_VN = "vi";
+    public static final String ZOTYE_APP2MCU_ACTION = "com.jsbd.serial.apptomcu";
+    public static final String ZOTYE_EXTRA_COMMAND = "commandCode";
+    public static final String ZOTYE_EXTRA_DATA = "Data";
+    public static final String ZOTYE_EXTRA_DATA_LENGTH = "DataLen";
+    public static final String ZOTYE_EXTRA_NUMBER = "callNumber";
+    public static final String ZOTYE_MCU2APP_ACTION = "com.jsbd.serial.mcutoapp";
+    public static final String ZOTYE_MODEL = "AC822X";
+    public static final String ZOTYE_PHONE_ACTION = "com.jsbdtek.phone.action";
+    public static final int ZOTYE_PHONE_CALL = 63;
+    public static final String ZOTYE_VOICE_ACTION = "com.hk.voice.action";
+}

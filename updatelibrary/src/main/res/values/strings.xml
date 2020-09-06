@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="android_auto_update_dialog_checking">Update new version</string>
+    <string name="android_auto_update_toast_no_new_update">Auto update</string>
+    <string name="android_auto_update_dialog_title">Update New Version</string>
+    <string name="android_auto_update_dialog_btn_download">Update</string>
+    <string name="android_auto_update_dialog_btn_cancel">Cancel</string>
+    <string name="android_auto_update_download_progress">Updating %1$d%%</string>
+    <string name="android_auto_update_notify_ticker">update_ticker</string>
+    <string name="update_content_notify_title">Updating app</string>
+</resources>

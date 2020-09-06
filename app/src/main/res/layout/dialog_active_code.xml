@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_rounder_8dp"
+    android:paddingVertical="@dimen/padding_medium">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_large"
+        android:text="@string/active_title"
+        android:textSize="@dimen/dialog_title_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutActiveCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_small"
+        android:hint="@string/active_code"
+        android:paddingStart="@dimen/padding_medium"
+        android:paddingEnd="@dimen/padding_dialog_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextActiveCode"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_def"
+            android:imeOptions="actionNext"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_small"
+        android:hint="@string/phone"
+        android:paddingStart="@dimen/padding_medium"
+        android:paddingEnd="@dimen/padding_dialog_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutActiveCode">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_def"
+            android:imeOptions="actionDone"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/acceptBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_def"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/circle_background"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:text="@string/accept"
+        android:textAllCaps="false"
+        android:textSize="@dimen/dialog_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutPhone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

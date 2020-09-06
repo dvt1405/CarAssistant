@@ -1,2 +1,8 @@
+include ':txznet'
+include ':baseui'
+include ':triggerwordoffline'
+include ':VTV'
+include ':opencam'
+include ':updatelibrary'
 include ':app'
-rootProject.name = "Vnest.CA"
+rootProject.name='Vnest_CA'

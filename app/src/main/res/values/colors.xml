@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#FF00283A</color>
+    <color name="colorPrimaryDark">#FF1D2122</color>
+    <color name="colorAccent">#1e88e5</color>
+
+    <color name="color1">#3164d7</color>
+    <color name="color2">#d92d29</color>
+    <color name="color3">#eeaa10</color>
+    <color name="color4">#3164d7</color>
+    <color name="color5">#2e9641</color>
+
+    <color name="GradientStrokeBorder">
+        <item name="android:startColor">#FFFFFF</item>
+        <item name="android:endColor">#00FFFF</item>
+        <item name="android:angle">270</item>
+    </color>
+    <color name="white">#FFFFFF</color>
+    <color name="soft_green">#72c472</color>
+    <color name="water_blue">#109ddc</color>
+    <color name="md_white_1000">#fff</color>>
+
+    <color name="white_transparent">#00FFFFFF</color>
+
 </resources>
+<!--    <color name="colorPrimary">#6200EE</color>-->
+<!--    <color name="colorPrimaryDark">#3700B3</color>-->
+<!--    <color name="colorAccent">#03DAC5</color>-->
+<!--</resources>-->

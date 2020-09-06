@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="isArrow"
+            type="Boolean" />
+
+        <variable
+            name="detailText"
+            type="String" />
+
+        <variable
+            name="bigText"
+            type="String" />
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_to_parent"
+            android:layout_marginEnd="@dimen/margin_horizontal_to_parent"
+            android:paddingVertical="@dimen/padding_horizontal_to_parent"
+            android:text="@{label}"
+            app:layout_constraintEnd_toStartOf="@+id/detail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/test" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_horizontal_to_parent"
+            android:paddingVertical="@dimen/padding_horizontal_to_parent"
+            android:text="@{detailText}"
+            android:textSize="@dimen/altitude_text_size_small_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/label"
+            app:layout_constraintEnd_toStartOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/test" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/def_icon_size_medium"
+            android:layout_height="@dimen/def_icon_size_medium"
+            android:layout_marginEnd="@dimen/icon_horizontal_margin"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/label" />
+
+        <include
+            layout="@layout/layout_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/line_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/label"
+            app:layout_constraintTop_toBottomOf="@id/label" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bigTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_horizontal_to_parent"
+            android:gravity="center_vertical|end"
+            android:text="@{bigText}"
+            android:textSize="@dimen/altitude_text_size_large_17"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label"
+            tools:text="@string/test" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

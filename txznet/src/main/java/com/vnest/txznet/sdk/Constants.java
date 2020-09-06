@@ -1,0 +1,47 @@
+package com.vnest.txznet.sdk;
+
+public class Constants {
+    public static final int EVENT_CALLBACK_BUILD_INFO = 202;
+    public static final int EVENT_CALLBACK_ON_LANGUAGE_CHANGE = 201;
+    public static final String KEY_BYTES_DATA = "bytes_data";
+    public static final String KEY_CALLBACK = "callback";
+    public static final String KEY_COMMAND = "command";
+    public static final String KEY_INIT_APPID = "appid";
+    public static final String KEY_INIT_APPTOKEN = "appToken";
+    public static final String KEY_INIT_COMPARE_RIGHT_CHANNEL = "compare_right_channel";
+    public static final String KEY_INIT_ENABLE_LANGUAGE_CHANGE_WITH_SYSTEM = "key_init_enable_language_change_with_system";
+    public static final String KEY_INIT_KEYWORDS = "keywords";
+    public static final String KEY_INIT_KEYWORD_GRAMMAR_PATH = "keyword_grammar_path";
+    public static final String KEY_INIT_KWSTHRESHOLD = "KeywordsThreshold";
+    public static final String KEY_INIT_LANGUAGE = "key_init_language";
+    public static final String KEY_INIT_MAIN_KEYWORDS = "keywords_main";
+    public static final String KEY_INIT_NEED_AEC = "need_aec";
+    public static final String KEY_INIT_UUID = "uuid";
+    public static final String KEY_INIT_VOICE_HIT = "voice_hit";
+    public static final String KEY_ONWAKEUP_JSON = "json";
+    public static final String KEY_ONWAKEUP_TEXT = "text";
+    public static final String KEY_STR_EVENT = "str_event";
+    public static final String KEY_UPDATE_KEYWORDS = "keywords";
+    public static final int VALUE_CALLBACK_BUILD_INFO = 110;
+    public static final int VALUE_CALLBACK_FAILED = 102;
+    public static final int VALUE_CALLBACK_ONCOMMAND = 108;
+    public static final int VALUE_CALLBACK_ONLANGUAGE = 109;
+    public static final int VALUE_CALLBACK_ONWAKEUP = 107;
+    public static final int VALUE_CALLBACK_RECONNECT = 100;
+    public static final int VALUE_CALLBACK_SUCCESS = 101;
+    public static final int VALUE_COMMAND_ADD_CONFIG_PATH_LIST = 12;
+    public static final int VALUE_COMMAND_CHANGE_LANGUAGE = 15;
+    public static final int VALUE_COMMAND_ENABLE_FLOAT_VIEW = 13;
+    public static final int VALUE_COMMAND_EXIT = 2;
+    public static final int VALUE_COMMAND_GET_BUILD_INFO = 14;
+    public static final int VALUE_COMMAND_GET_CURRENT_USE_LANGUAGE = 11;
+    public static final int VALUE_COMMAND_INIT = 1;
+    public static final int VALUE_COMMAND_REG_COMMAND = 7;
+    public static final int VALUE_COMMAND_SET_LOG_LEVEL = 9;
+    public static final int VALUE_COMMAND_SET_WAKEUP_THRESHOLD = 10;
+    public static final int VALUE_COMMAND_START = 3;
+    public static final int VALUE_COMMAND_STOP = 4;
+    public static final int VALUE_COMMAND_UI_EVENT = 6;
+    public static final int VALUE_COMMAND_UNREG_COMMAND = 8;
+    public static final int VALUE_COMMAND_UPDATE = 5;
+}

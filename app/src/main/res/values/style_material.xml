@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MaterialComponent" parent="Theme.MaterialComponents" />
+
+    <style name="Material.Alert.ThemeDefault" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitlePanelStyle">
+            @style/MaterialAlertDialog.MaterialComponents.Title.Panel
+        </item>
+        <item name="materialAlertDialogTitleIconStyle">
+            @style/MaterialAlertDialog.MaterialComponents.Title.Icon
+        </item>
+        <item name="materialAlertDialogTitleTextStyle">@style/Material.Alert.ThemeDefault.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">@style/Material.Alert.ThemeDefault.Text.Body
+        </item>
+        <item name="colorSurface">@color/white_transparent</item>
+        <item name="android:background">@drawable/background_corners_8dp</item>
+        <item name="android:colorBackground">@color/white_transparent</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>
+        <!--        <item name="windowMinWidthMajor">90%</item>-->
+        <!--        <item name="windowMinWidthMinor">90%</item>-->
+        <item name="buttonBarButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>
+        <item name="android:checkedTextViewStyle">@style/Material.Alert.ThemeDefault.Text.Body
+        </item>
+    </style>
+
+    <style name="Material.Alert.ThemeDefault.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+        <item name="android:textStyle">bold</item>
+        <!--        <item name="fontFamily">@font/montserrat_medium</item>-->
+        <!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="Material.Alert.ThemeDefault.Text" parent="Base.MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:textColor">#232F34</item>
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <!--        <item name="fontFamily">@font/montserrat_medium</item>-->
+        <!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="Material.Alert.ThemeDefault.Text.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">#232F34</item>
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+        <!--        <item name="android:typeface">monospace</item>-->
+        <!--        <item name="android:textStyle">normal</item>-->
+        <!--        <item name="fontFamily">@font/montserrat_medium</item>-->
+        <!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="singleLine">true</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textAppearance">@style/Material.Alert.ThemeDefault.Text.Body</item>
+    </style>
+
+    <style name="MaterialButton" parent="MaterialComponent">
+        <item name="android:background">@drawable/background_corners_8dp</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <!--        <item name="android:foreground">?android:attr/selectableItemBackground</item>-->
+    </style>
+
+    <!--    <style name="BottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">-->
+    <!--        <item name="android:background">@drawable/background_bottom_sheet</item>-->
+    <!--        <item name="android:backgroundTint">@color/colorTransparent</item>>-->
+    <!--    </style>-->
+
+    <!--    <style name="Line" parent="Theme.MaterialComponents.Light">-->
+    <!--        &lt;!&ndash;        <item name="android:background">#806C7B8A</item>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        <item name="android:backgroundTint">@color/colorGreyTransparent</item>&ndash;&gt;-->
+    <!--        <item name="android:layout_height">0.5dp</item>-->
+    <!--        <item name="android:layout_width">match_parent</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="BottomSheetItem" parent="Widget.AppCompat.TextView">-->
+    <!--        <item name="android:paddingTop">16dp</item>-->
+    <!--        <item name="android:paddingBottom">16dp</item>-->
+    <!--        <item name="android:paddingStart">16dp</item>-->
+    <!--        <item name="android:foreground">?android:attr/selectableItemBackground</item>-->
+    <!--        <item name="android:textSize">15sp</item>-->
+
+    <!--        <item name="android:textColor">@color/md_black_1000</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="BottomSheetItem.FirstItem" parent="BottomSheetItem">-->
+    <!--        <item name="android:background">@drawable/background_bottom_sheet</item>-->
+    <!--    </style>-->
+
+    <style name="BottomSheetStyle" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
+    </style>
+
+    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <dimen name="text_size_medium_15sp">15sp</dimen>
+</resources>
