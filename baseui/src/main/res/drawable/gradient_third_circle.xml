@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <size
+        android:width="50dp"
+        android:height="50dp" />
+    <gradient
+        android:angle="0"
+        android:centerColor="@color/skeleton_elements_light"
+        android:centerX="20"
+        android:endColor="@color/skeleton_elements_light_50"
+        android:startColor="@color/skeleton_elements" />
+</shape>

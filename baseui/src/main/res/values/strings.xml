@@ -1,0 +1,62 @@
+<resources>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="txt_assign">Assign</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="login_button_title">Login</string>
+    <string name="alert_ok_button_title">OK</string>
+    <string name="message_require_login_signup">To access this feature you need to sign in or create an account.</string>
+    <string name="txt_sign_in_sign_up">Sign in/Sign up</string>
+    <string name="cancel_button_alert_title">Cancel</string>
+    <string name="skip_button_title">Skip</string>
+    <string name="title_activity_master">Altitude Admin</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_lost_property">Lost Property</string>
+    <string name="menu_maintainance">Maintaince</string>
+    <string name="menu_arrival_departure" >Reversations</string>
+    <string name="menu_kiosk">Kiosk</string>
+    <string name="menu_rooms">Rooms</string>
+    <string name="menu_logout">Logout</string>
+    <string name="properties">Property</string>
+    <string name="font_family">Roboto</string>
+    <string name="button_dialog_cancel">Cancel</string>
+    <string name="button_dialog_ok">OK</string>
+    <string name="button_calendar_screen_ok">OK (%s)</string>
+    <string name="no_comment">No Comment</string>
+    <string name="comments">Comments</string>
+    <string name="lost_property_details">Lost Property Details</string>
+    <string name="errorTitle">Error</string>
+    <string name="networkErrorMessage">There is an error with the network. Please try again later.</string>
+    <string name="no_data_available">There are no reservations</string>
+    <string name="view_reservation">View</string>
+    <string name="assign_to_kiosk">Assign To Kiosk</string>
+    <string name="minibar">"MiniBar"</string>
+    <string name="default_content_image_description">Image here</string>
+    <string name="default_creator">Tran Quoc Viet</string>
+    <string name="default_date_time">Aug 30 2019 at 12:30</string>
+    <string name="default_component">My Comment is so good</string>
+    <string name="default_reported">Reported</string>
+    <string name="booking_date">Booking date</string>
+
+    <string name="test">Test</string>
+    <string name="test_currency">$000.0</string>
+    <string name="test_price_unit">/unit</string>
+    <string name="search">Search</string>
+    <string name="large_text">"What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).   Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.  The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.  Where can I get some? There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.  5 \tparagraphs \twords \tbytes \tlists \tStart with 'Lorem ipsum dolor sit amet...' "</string>
+
+
+</resources>

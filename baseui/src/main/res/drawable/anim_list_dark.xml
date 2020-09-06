@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<animation-list xmlns:android = "http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable = "@drawable/gradient_first_dark"
+        android:duration="@integer/anim_duration_drawable_medium" />
+    <item
+        android:drawable = "@drawable/gradient_second_dark"
+        android:duration="@integer/anim_duration_drawable_medium" />
+    <item
+        android:drawable = "@drawable/gradient_thirst_dark"
+        android:duration="@integer/anim_duration_drawable_medium" />
+    <!--    <item-->
+    <!--        android:drawable = "@drawable/gradient_first"-->
+    <!--        android:duration = "3000" />-->
+</animation-list>

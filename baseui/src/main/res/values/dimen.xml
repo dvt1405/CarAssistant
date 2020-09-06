@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_micro">@dimen/_6sdp</dimen>
+    <dimen name="text_size_small">@dimen/_8sdp</dimen>
+    <dimen name="text_size_small_big">@dimen/_10sdp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
+    <dimen name="text_size_medium_15sp">15sp</dimen>
+    <dimen name="text_size_details_medium">13sp</dimen>
+
+    <dimen name="text_size_normal">17sp</dimen>
+    <dimen name="text_size_large">@dimen/_16sdp</dimen>
+    <dimen name="text_size_very_large">@dimen/_20sdp</dimen>
+
+    <dimen name="common_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
+    <dimen name="very_large_padding">32dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="tiny_padding">4dp</dimen>
+    <dimen name="common_button_height">@dimen/_40sdp</dimen>
+
+    <dimen name="cover_height">@dimen/_150sdp</dimen>
+    <dimen name="property_detail_top_height">@dimen/_250sdp</dimen>
+
+
+
+
+</resources>

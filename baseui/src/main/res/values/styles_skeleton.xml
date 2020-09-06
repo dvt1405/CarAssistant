@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SkeletonView">
+        <item name="android:background">@drawable/background_corners_16dp</item>
+        <item name="android:backgroundTint">@color/skeleton_elements</item>
+    </style>
+    <style name="SkeletonTextView">
+        <item name="android:background">@drawable/background_corners_4dp</item>
+    </style>
+    <style name="SkeletonTextView.Background" parent="SkeletonTextView">
+        <item name="android:backgroundTint">@color/skeleton_elements</item>
+    </style>
+
+    <style name="SkeletonViewImage">
+        <item name="android:background">@drawable/background_circle</item>
+        <item name="android:backgroundTint">@color/skeleton_elements</item>
+    </style>
+
+    <style name="SkeletonView.Title" parent="SkeletonView">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:minWidth">30dp</item>
+    </style>
+
+    <style name="SkeletonView.Details" parent="SkeletonView">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">18dp</item>
+        <item name="android:minWidth">20dp</item>
+        <item name="android:minHeight">10dp</item>
+    </style>
+
+    <style name="SkeletonView.Title.Small" parent="SkeletonView.Title">
+        <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="SkeletonView.Details.Tiny" parent="SkeletonView.Details">
+        <item name="android:layout_height">15dp</item>
+    </style>
+
+    <style name="SkeletonView.Details.Small" parent="SkeletonView.Details">
+        <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="SkeletonView.Details.Medium" parent="SkeletonView.Details">
+        <item name="android:layout_height">25dp</item>
+    </style>
+
+    <style name="SkeletonView.Details.Big" parent="SkeletonView.Details">
+        <item name="android:layout_height">30dp</item>
+    </style>
+</resources>

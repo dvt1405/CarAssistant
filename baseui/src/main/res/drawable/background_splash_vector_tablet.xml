@@ -1,0 +1,4 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/background_splash_new_outside"/>
+    <item android:drawable="@drawable/background_splash_vector"/>
+</layer-list>

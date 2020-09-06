@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTransparent">#005C5C5C</color>
+
+    <color name="colorAccent">#1e88e5</color>
+    <color name="colorPrimary">#ffa000</color>
+    <color name="colorPrimaryDark">#ff8f00</color>
+    <color name="colorPrimaryLight">#ffb300</color>
+
+    <color name="colorTextFieldDark">#263238</color>
+    <color name="colorTextFieldLight">#eceff1</color>
+
+    <color name="colorSecondary">@color/grey</color>
+
+    <color name="colorPrimaryTran">@color/grey</color>
+    <color name="colorGreyTran">#94ECEFF1</color>
+    <color name="colorGreyTransparent">#22000000</color>
+
+    <color name="cirle_background_black_tran">#85140F26</color>
+    <color name="black_tran">#41000000</color>
+    <color name="grey">#5C5C5C</color>
+    <color name="bg_grey_80a">#CC9E9E9E</color>
+    <color name="colorTextDialog">#87000000</color>
+
+    <color name="amber">#FBBD04</color>
+    <color name="red">#ff0000</color>
+    <color name="light_transparent_">#10000000</color>
+    <color name="skeleton_elements">#90ECECEC</color>
+    <color name="skeleton_elements_transparent">#00ECECEC</color>
+    <color name="skeleton_elements_100">#ECECEC</color>
+
+    <color name="white_transparent">#00FFFFFF</color>
+    <color name="icon_color_grey">#838287</color>
+    <color name="search_layout">#EEEEF0</color>
+    <color name="parentBackground">#FAFAFA</color>
+
+    <color name="skeleton_elements_light">#F3F3F3</color>
+    <color name="skeleton_elements_light_50">#90F3F3F3</color>
+    <color name="skeleton_elements_dark">#C9CCD1</color>
+    <color name="skeleton_elements_dark_90">#90C9CCD1</color>
+
+
+    <color name="skeleton_elements_inside">#90DADCDB</color>
+    <color name="skeleton_elements_small_background">#EBEDEC</color>
+
+    <color name="skeleton_elements_big_background">#DADCDB</color>
+    <color name="skeleton_elements_list_dark">#EBEDEC</color>
+</resources>

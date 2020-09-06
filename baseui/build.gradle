@@ -1,0 +1,86 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        androidExtensions {
+            experimental = true
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // App dependencies
+    implementation appDependencies.appCompat
+    implementation appDependencies.carView
+    implementation googleDependencies.materialDesign
+
+    implementation appDependencies.recyclerView
+    implementation "androidx.annotation:annotation:$androidXAnnotations"
+    implementation appDependencies.constrainLayout
+
+    // Architecture Components
+    implementation archComponentDependencies.pagingRuntime
+    implementation archComponentDependencies.pagingRxjava
+    implementation archComponentDependencies.viewModel
+    implementation archComponentDependencies.roomDatabaseRunTime
+    kapt archComponentDependencies.roomDatabaseKapt
+    implementation archComponentDependencies.archLifecycleVersionExtension
+    kapt archComponentDependencies.archLifecycleVersionKapt
+
+    implementation archComponentDependencies.navigationFragment
+    implementation archComponentDependencies.navigationUI
+
+    implementation "com.intuit.sdp:sdp-android:$sdpVersion"
+
+    testImplementation 'junit:junit:4.12'
+    implementation appDependencies.constrainLayout
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "com.github.skydoves:balloon:1.1.4"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03'
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation 'com.mikepenz:materialize:1.2.1@aar'
+    implementation 'androidx.preference:preference:1.1.1'
+
+}

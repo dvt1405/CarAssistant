@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="NegativeMargin">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/scroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/arrow_up"
+        android:background="@drawable/background_tooltip_8dp"
+        android:backgroundTint="#000"
+        android:elevation="8dp"
+        android:minHeight="100dp"
+        android:minWidth="200dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrow_up"
+        android:elevation="8dp"
+        android:scaleType="fitXY"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:srcCompat="@drawable/arrow"
+        tools:ignore="VectorDrawableCompat" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrow_down"
+        android:layout_marginTop="-1dp"
+        app:srcCompat="@drawable/arrow"
+        android:layout_marginStart="7dp"
+        android:rotation="180"
+        android:elevation="8dp"
+        android:scaleType="fitXY"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="gone"
+        android:layout_below="@id/scroller"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

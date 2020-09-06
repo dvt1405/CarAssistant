@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge
+        </item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall
+        </item>
+
+        <item name="materialAlertDialogTheme">@style/Material.Alert.ThemeDefault</item>
+        <item name="alertDialogTheme">@style/Material.Alert.ThemeDefault</item>
+        <item name="android:alertDialogTheme">@style/Material.Alert.ThemeDefault</item>
+        <item name="android:actionMenuTextColor">@color/grey</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <!--        <item name="fontFamily">@font/montserrat_medium</item>-->
+        <!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="ButtonStyle" parent="android:Widget.Button">
+        <!--        <item name="fontFamily">@font/montserrat_medium</item>-->
+        <!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:dropDownHorizontalOffset">-8dp</item>
+        <item name="android:dropDownVerticalOffset">2dp</item>
+<!--        <item name="android:popupBackground">@drawable/background_corners_4dp</item>-->
+        <!--        <item name="android:windowClipToOutline">true</item>-->
+        <!--        <item name="android:clipChildren">true</item>-->
+        <!--        <item name="android:clipToPadding">true</item>-->
+    </style>
+
+    <style name="myPopupMenuTextAppearanceSmall" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Small">
+        <!--        <item name="android:textColor">#545656</item>-->
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <!--        <item name="android:textColor">#545656</item>-->
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+    </style>
+
+    <style name="Material.Alert.ThemeDefault.Width80" parent="Material.Alert.ThemeDefault">
+        <item name="windowMinWidthMajor">80%</item>
+        <item name="windowMinWidthMinor">80%</item>
+    </style>
+
+    <style name="waiting_dialog" parent="Theme.AppCompat.Light.Dialog">
+        <!--        <item name="windowMinWidthMajor">90%</item>-->
+        <!--        <item name="windowMinWidthMinor">90%</item>-->
+    </style>
+
+    <style name="SettingPreference">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="SettingPreference.Category" parent="SettingPreference">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="SettingPreference.Preference" parent="SettingPreference">
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="CustomStyleSearchEditText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@color/grey</item>
+        <item name="colorControlHighlight">@color/grey</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="ButtonIconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:minHeight">24dp</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottom_sheet</item>
+    </style>
+
+    <style name="icon_style">
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="MyFeedbackButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:width">45dp</item>
+        <item name="android:height">45dp</item>
+
+        <!--        <item name="android:layout_marginEnd">8dp</item>-->
+    </style>
+
+    <style name="MyFeedbackButton.Start" parent="MyFeedbackButton">
+        <item name="android:layout_marginStart">24dp</item>
+        <!--        <item name="android:layout_marginEnd">8dp</item>-->
+    </style>
+
+    <style name="MyFeedbackButton.End" parent="MyFeedbackButton">
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <!--        <item name="android:layout_marginEnd">8dp</item>-->
+    </style>
+</resources>

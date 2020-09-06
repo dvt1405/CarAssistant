@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--large text style-->
+    <style name="largeText" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <!--<item name="android:fontFamily">@font/common_font</item>-->
+    </style>
+
+    <style name="largeText.bold" parent="largeText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="largeText.normal" parent="largeText">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="largeText.bold.black" parent="largeText.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="largeText.normal.black" parent="largeText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="largeText.bold.white" parent="largeText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="largeText.normal.white" parent="largeText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="largeText.bold.primary" parent="largeText.bold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="largeText.normal.primary" parent="largeText.normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="largeText.bold.grey" parent="largeText.bold">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="largeText.normal.grey" parent="largeText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+
+    <!--normal text style-->
+    <style name="normalText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+<!--        <item name="android:fontFamily">@font/pacifico</item>-->
+    </style>
+
+    <style name="normalText.bold" parent="normalText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="normalText.normal" parent="normalText">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="normalText.bold.black" parent="normalText.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="normalText.normal.black" parent="normalText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="normalText.bold.white" parent="normalText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="normalText.normal.white" parent="normalText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="normalText.bold.primary" parent="normalText.bold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="normalText.normal.primary" parent="normalText.normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="normalText.bold.grey" parent="normalText.bold">
+        <!--        <item name="android:textColor">@color/md_grey_600</item>-->
+    </style>
+
+    <style name="normalText.normal.grey" parent="normalText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <!--medium text style-->
+    <style name="mediumText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+<!--        <item name="android:fontFamily">@font/common_font</item>-->
+    </style>
+
+    <style name="mediumText.bold" parent="mediumText">
+        <item name="android:textStyle">bold</item>
+<!--        <item name="android:fontFamily">@font/montserrat_bold</item>-->
+    </style>
+
+    <style name="mediumText.normal" parent="mediumText">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="mediumText.bold.black" parent="mediumText.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="mediumText.normal.black" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="base.mediumText.normal.black" parent="mediumText.normal">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="mediumText.title.black.normal" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textSize">@dimen/text_size_medium_15sp</item>
+<!--        <item name="fontFamily">@font/montserrat_regular</item>-->
+<!--        <item name="android:fontFamily">@font/montserrat_medium</item>-->
+    </style>
+
+    <style name="mediumText.title.black.bold" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+<!--        <item name="android:textSize">@dimen/title_text_size_medium</item>-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="mediumText.bold.white" parent="mediumText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="mediumText.normal.white" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="mediumText.bold.primary" parent="mediumText.bold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="mediumText.normal.primary" parent="mediumText.normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="mediumText.bold.grey" parent="mediumText.bold">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="mediumText.normal.grey" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+        <item name="android:maxLength">40</item>
+    </style>
+
+    <!--medium text details style-->
+    <style name="mediumTextDetails" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_details_medium</item>
+        <!--<item name="android:fontFamily">@font/common_font</item>-->
+    </style>
+
+    <style name="mediumTextDetails.bold" parent="mediumTextDetails">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="mediumTextDetails.normal" parent="mediumTextDetails">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="mediumTextDetails.bold.black" parent="mediumTextDetails.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="mediumTextDetails.normal.black" parent="mediumTextDetails.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="mediumTextDetails.title.black" parent="mediumTextDetails.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="mediumTextDetails.bold.grey" parent="mediumText.bold">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="mediumTextDetails.normal.grey" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="mediumTextDetails.bold.white" parent="mediumText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="mediumTextDetails.normal.white" parent="mediumText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="mediumTextDetails.bold.primary" parent="mediumText.bold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="mediumTextDetails.normal.primary" parent="mediumText.normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!--small text style-->
+    <style name="smallText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_details_medium</item>
+        <!--<item name="android:fontFamily">@font/common_font</item>-->
+    </style>
+
+    <style name="smallText.bold" parent="smallText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="smallText.normal" parent="smallText">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="smallText.bold.black" parent="smallText.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="smallText.normal.black" parent="smallText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="smallText.bold.white" parent="smallText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="smallText.normal.white" parent="smallText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="smallText.bold.primary" parent="smallText.bold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="smallText.normal.primary" parent="smallText.normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="smallText.bold.grey" parent="smallText.bold">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="smallText.normal.grey" parent="smallText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <!--micro text style-->
+    <style name="microText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <!--<item name="android:fontFamily">@font/common_font</item>-->
+    </style>
+
+    <style name="microText.bold" parent="microText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="microText.normal" parent="microText">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="microText.bold.black" parent="microText.bold">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="microText.normal.black" parent="microText.normal">
+        <item name="android:textColor">@color/md_black_1000</item>
+    </style>
+
+    <style name="microText.bold.white" parent="microText.bold">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="microText.normal.white" parent="microText.normal">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <style name="microText.bold.primary" parent="microText.bold">
+        <item name="android:textColor">@color/primary_dark</item>
+    </style>
+
+    <style name="microText.normal.primary" parent="microText.normal">
+        <!--        <item name="android:textColor">@color/colorPrimaryDark</item>-->
+    </style>
+
+    <style name="microText.bold.grey" parent="microText.bold">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="microText.normal.grey" parent="microText.normal">
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="ToolbarTitleText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="ToolbarTitleTextExpand" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+
+    </style>
+
+</resources>

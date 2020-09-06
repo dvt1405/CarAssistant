@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <declare-styleable name="TextViewCustomColor">-->
+<!--        <attr name="type" format="enum">-->
+<!--            <enum name="descriptions" value="0" />-->
+<!--            <enum name="main" value="1" />-->
+<!--            <enum name="highlighted" value="2" />-->
+<!--            <enum name="title" value="3" />-->
+<!--            <enum name="separator" value="4" />-->
+<!--            <enum name="section_header" value="5" />-->
+<!--        </attr>-->
+<!--    </declare-styleable>-->
+</resources>

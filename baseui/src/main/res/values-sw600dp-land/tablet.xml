@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isTabletLandscape">true</bool>
+
+<!--    <style name="Material.Alert.ThemeDefault" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">-->
+<!--        <item name="materialAlertDialogTitlePanelStyle">-->
+<!--            @style/MaterialAlertDialog.MaterialComponents.Title.Panel-->
+<!--        </item>-->
+<!--        <item name="materialAlertDialogTitleIconStyle">-->
+<!--            @style/MaterialAlertDialog.MaterialComponents.Title.Icon-->
+<!--        </item>-->
+<!--        <item name="materialAlertDialogTitleTextStyle">@style/Material.Alert.ThemeDefault.Text-->
+<!--        </item>-->
+<!--        <item name="materialAlertDialogBodyTextStyle">@style/Material.Alert.ThemeDefault.Text.Body-->
+<!--        </item>-->
+<!--        <item name="colorSurface">@color/white_transparent</item>-->
+<!--        <item name="android:background">@drawable/background_corners_8dp</item>-->
+<!--        <item name="android:colorBackground">@color/white_transparent</item>-->
+<!--        <item name="buttonBarPositiveButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>-->
+<!--        <item name="buttonBarNegativeButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>-->
+<!--        <item name="buttonBarNeutralButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>-->
+<!--        <item name="buttonBarButtonStyle">@style/Material.Alert.ThemeDefault.Button</item>-->
+<!--        <item name="android:checkedTextViewStyle">@style/Material.Alert.ThemeDefault.Text.Body-->
+<!--        </item>-->
+<!--    </style>-->
+</resources>
