@@ -6,7 +6,7 @@ import ai.kitt.vnest.basedata.database.sharepreference.VnestSharePreference
 import ai.kitt.vnest.databinding.FragmentEnterBksBinding
 import ai.kitt.vnest.feature.activitymain.ViewModel
 import ai.kitt.vnest.feature.screensettings.SettingsViewModel
-import ai.kitt.vnest.util.AppUtil
+import ai.kitt.vnest.util.NavigationUtil
 import ai.kitt.vnest.util.ConfirmDialog
 import ai.kitt.vnest.util.KeyboardUtil
 import android.os.Bundle
@@ -18,7 +18,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_enter_bks.view.*
 import kotlinx.android.synthetic.main.fragment_enter_bks.view.appbar
-import kotlinx.android.synthetic.main.fragment_maps.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class FragmentEnterBks : BaseFragment(R.layout.fragment_enter_bks) {
@@ -55,7 +54,7 @@ class FragmentEnterBks : BaseFragment(R.layout.fragment_enter_bks) {
             }
             VnestSharePreference.getInstance(requireContext()).saveBks(view.mEditText.text.toString())
             viewModel.settingLiveData.postValue(true)
-            parentViewModel.sendCarBks(AppUtil.getDeviceId(requireActivity()), view.mEditText.text.toString())
+            parentViewModel.sendCarBks(NavigationUtil.getDeviceId(requireActivity()), view.mEditText.text.toString())
             requireActivity().onBackPressed()
         }
     }

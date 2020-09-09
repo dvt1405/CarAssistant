@@ -1,7 +1,6 @@
 package ai.kitt.vnest.feature.screenspeech.adapters;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import ai.kitt.vnest.R;
 import ai.kitt.vnest.basedata.entity.Poi;
-import ai.kitt.vnest.util.AppUtil;
+import ai.kitt.vnest.util.NavigationUtil;
 import ai.kitt.vnest.util.GlideApp;
 
 import java.util.List;
@@ -84,7 +81,7 @@ public class AdapterAddressResult extends RecyclerView.Adapter<RecyclerView.View
                     itemName.setHeight(0);
                 }
                 itemView.setOnClickListener(view1 -> {
-                    AppUtil.displayPointToMap(poi, itemView.getContext());
+                    NavigationUtil.displayPointToMap(poi, itemView.getContext());
                 });
                 if(poi.getImg() !=null && !poi.getImg().trim().isEmpty()){
                     GlideApp.with(itemView)

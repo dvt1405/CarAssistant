@@ -254,9 +254,11 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                         onSearchPlacesListener.onOpenMapToPoi(poiArrayList.get(0));
                     } catch (Exception e) {
                         onSearchPlacesListener.onSearchPlacesNoDataFound();
+                        Log.e("Error",e.getMessage(),e);
                     }
                 } else {
                     onSearchPlacesListener.onSelectPlacesToNavigate(poiArrayList);
+
                 }
 
 
@@ -265,7 +267,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                 onSearchPlacesListener.onOpenMapToPoi(poi);
             }
         } catch (Exception e) {
-            Timber.e(e);
+            Log.e("Error",e.getMessage(),e);
         }
 
     }

@@ -23,7 +23,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
     public static final String AIR_PACKAGE_NAME = "com.tpms3";
 //    public static boolean isActivated = false;
     public static boolean isActivated = false;
-    public static boolean isForTest = true;
+    public static boolean isForTest = false;
     private int activityReferences = 0;
     public boolean isInBackground = false;
 

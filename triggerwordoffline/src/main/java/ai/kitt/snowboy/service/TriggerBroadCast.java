@@ -10,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import com.blankj.utilcode.util.AppUtils;
+
 import java.util.List;
 
 public class TriggerBroadCast extends BroadcastReceiver {
@@ -66,11 +68,7 @@ public class TriggerBroadCast extends BroadcastReceiver {
         if (action.equals(ACTION_START_APP)) {
             Log.e(TAG, "Start app from broadcast");
             try {
-                PackageManager pm = context.getPackageManager();
-                Intent launchIntent = pm.getLaunchIntentForPackage("ai.kitt.snowboy");
-                assert launchIntent != null;
-                launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(launchIntent);
+                AppUtils.launchApp("ai.kitt.snowboy");
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
             }

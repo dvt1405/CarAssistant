@@ -80,10 +80,11 @@ import ai.kitt.vnest.feature.screencheckcarvilolations.WebViewFragment;
 import ai.kitt.vnest.feature.screenhome.FragmentHome;
 import ai.kitt.vnest.feature.screensettings.FragmentSettings;
 import ai.kitt.vnest.feature.screenspeech.FragmentResult;
+import ai.kitt.vnest.receiver.OpenNavigationReceiver;
 import ai.kitt.vnest.speechmanager.speechonline.OnResultReady;
 import ai.kitt.vnest.speechmanager.speechonline.SpeechRecognizerManager;
 import ai.kitt.vnest.speechmanager.texttospeech.TextToSpeechManager;
-import ai.kitt.vnest.util.AppUtil;
+import ai.kitt.vnest.util.NavigationUtil;
 import ai.kitt.vnest.util.ConfirmDialog;
 import ai.kitt.vnest.util.DialogActiveControl;
 import ai.kitt.vnest.util.DialogUtils;
@@ -206,6 +207,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     protected Boolean isStartRecognizer;
     public DownLoadBroadCast downLoadBroadCast;
     private TriggerBroadCast triggerBroadCast;
+    private OpenNavigationReceiver openNavigationReceiver;
 
     public SpeechRecognizerManager getSpeechRecognizerManager() {
         return speechRecognizerManager;
@@ -709,7 +711,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                 Settings.Secure.ANDROID_ID);
         // Get phone's location
         if (callDeviceInfoTimes < 1 || !App.isActivated) {
-            viewModel.sendCarInfo(deviceId, AppUtil.getImei(this));
+            viewModel.sendCarInfo(deviceId, NavigationUtil.getImei(this));
         }
     }
 
@@ -758,8 +760,8 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                     dialogActiveControl.dismiss();
                 }
                 viewModel.activeDevice(new ActiveCode(phone, activeCode,
-                                AppUtil.getImei(BaseMainActivity.this),
-                                AppUtil.getDeviceId(BaseMainActivity.this)),
+                                NavigationUtil.getImei(BaseMainActivity.this),
+                                NavigationUtil.getDeviceId(BaseMainActivity.this)),
                         BaseMainActivity.this);
             }
 
@@ -939,7 +941,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onSearchYoutubeSuccess(Youtube video) {
-        AppUtil.openYoutube(this, video.getHref());
+        NavigationUtil.openYoutube(this, video.getHref());
         sendMessage(video.getTitle(), false);
         resetContext();
     }
@@ -963,7 +965,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         sendMessage(SELECT_YOUR_PLACE, false);
         speak(SELECT_YOUR_PLACE, false);
         contexts = null;
-        ItemNavigationAdapter adapter = new ItemNavigationAdapter(poi -> AppUtil.navigationToPoint(poi, BaseMainActivity.this));
+        ItemNavigationAdapter adapter = new ItemNavigationAdapter(poi -> NavigationUtil.navigationToPoint(poi, BaseMainActivity.this));
         adapter.setData(poiArrayList);
         android.os.Message message = TextToSpeechManager.mHandler.obtainMessage(TextToSpeechManager.UPDATE_AFTER_PROCESS_TEXT);
         message.obj = poiArrayList;
@@ -974,7 +976,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     @Override
     public void onOpenMapToPoi(Poi poi) {
         sendMessage(NAVIGATE_TO + poi.getTitle() + "...", false);
-        AppUtil.navigationToPoint(poi, BaseMainActivity.this);
+        NavigationUtil.navigationToPoint(poi, BaseMainActivity.this);
         resetContext();
     }
 
@@ -986,7 +988,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onSearchRoadFromToSuccess(String location) {
-        AppUtil.navigationToLocation(location, this);
+        NavigationUtil.navigationToLocation(location, this);
         sendMessage(FIND_WAY_TO + location, false);
         resetContext();
     }
@@ -994,7 +996,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     @Override
     public void onSearchNearestSuccess(String location) {
         sendMessage("Tìm " + location + "gần nhất", false);
-        AppUtil.displayLocationToMap(location, this);
+        NavigationUtil.displayLocationToMap(location, this);
         resetContext();
     }
 
@@ -1031,34 +1033,18 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     protected void onResume() {
         super.onResume();
         Timber.d("stop TRIGGER");
-        if (downLoadBroadCast == null) {
-            ProgressDialog waitingDialog = DialogUtils.showProgressDialog(this);
-            downLoadBroadCast = DownLoadBroadCast.initBroadCast(this, new DownLoadBroadCast.OnReceive() {
-                @Override
-                public void onReceiveProgress(int progress) {
-                    waitingDialog.dismiss();
-                    initProgressDialog();
-                    downloadDialog.setMessage("Downloading... ");
-                    downloadDialog.setProgress(progress);
-                    downloadDialog.show();
-                }
-
-                @Override
-                public void onFinish() {
-                }
-
-                @Override
-                public void onWaiting() {
-                    waitingDialog.show();
-                }
-
-                @Override
-                public void onRetry() {
-                    updateApp(viewModel.carInfoResponse);
-                }
-            });
+        registerTriggerBroadCast();
+        registerDownloadBroadCast();
+        registerOpenNavigationBroadCast();
+        if (checkPermission()) {
+            if (NavigationUtil.checkInternetConnection(this) && App.isActivated) {
+                startResultFragment();
+                viewModel.getLiveDataStartRecord().postValue(true);
+            }
         }
+    }
 
+    public void registerTriggerBroadCast() {
         if (triggerBroadCast == null) {
             triggerBroadCast = TriggerBroadCast.initBroadCast(this, new TriggerBroadCast.OnHandleTrigger() {
                 @Override
@@ -1094,12 +1080,41 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                 }
             }, MainActivity.class);
         }
+    }
 
-        if (checkPermission()) {
-            if (AppUtil.checkInternetConnection(this) && App.isActivated) {
-                startResultFragment();
-                viewModel.getLiveDataStartRecord().postValue(true);
-            }
+    public void registerDownloadBroadCast() {
+        if (downLoadBroadCast == null) {
+            ProgressDialog waitingDialog = DialogUtils.showProgressDialog(this);
+            downLoadBroadCast = DownLoadBroadCast.initBroadCast(this, new DownLoadBroadCast.OnReceive() {
+                @Override
+                public void onReceiveProgress(int progress) {
+                    waitingDialog.dismiss();
+                    initProgressDialog();
+                    downloadDialog.setMessage("Downloading... ");
+                    downloadDialog.setProgress(progress);
+                    downloadDialog.show();
+                }
+
+                @Override
+                public void onFinish() {
+                }
+
+                @Override
+                public void onWaiting() {
+                    waitingDialog.show();
+                }
+
+                @Override
+                public void onRetry() {
+                    updateApp(viewModel.carInfoResponse);
+                }
+            });
+        }
+    }
+
+    public void registerOpenNavigationBroadCast() {
+        if (openNavigationReceiver == null) {
+            openNavigationReceiver = OpenNavigationReceiver.startThis(this);
         }
     }
 
@@ -1160,6 +1175,9 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         }
         if (dialogActiveControl != null) {
             dialogActiveControl.dismiss();
+        }
+        if (openNavigationReceiver != null) {
+            unregisterReceiver(openNavigationReceiver);
         }
     }
 }

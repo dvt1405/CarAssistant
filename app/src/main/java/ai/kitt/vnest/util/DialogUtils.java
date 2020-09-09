@@ -41,7 +41,7 @@ public class DialogUtils {
         return waitingDialog;
     }
 
-    public static AlertDialog getConfirmDialog(Context context, String title, String message, boolean isShowCancelButton, OnConfirmListener onConfirmListener) {
+    public static AlertDialog.Builder getConfirmDialog(Context context, String title, String message, boolean isShowCancelButton, OnConfirmListener onConfirmListener) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message);
@@ -56,14 +56,14 @@ public class DialogUtils {
                 dialog.dismiss();
             });
         }
-        return alertDialogBuilder.create();
+        return alertDialogBuilder;
     }
 
-    public static AlertDialog getConfirmDialog(Context context, String title, String message, OnConfirmListener onConfirmListener) {
+    public static AlertDialog.Builder getConfirmDialog(Context context, String title, String message, OnConfirmListener onConfirmListener) {
         return getConfirmDialog(context, title, message, false, onConfirmListener);
     }
 
-    public static AlertDialog getConfirmDialog(Context context, String title, String message) {
+    public static AlertDialog.Builder getConfirmDialog(Context context, String title, String message) {
         return getConfirmDialog(context, title, message, null);
     }
 

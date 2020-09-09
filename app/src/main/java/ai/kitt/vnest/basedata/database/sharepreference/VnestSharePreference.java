@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
-import ai.kitt.vnest.util.AppUtil;
+import ai.kitt.vnest.util.NavigationUtil;
 
 public class VnestSharePreference {
     private static VnestSharePreference sharePreference;
@@ -55,7 +55,7 @@ public class VnestSharePreference {
     }
 
     public String getMapAppId() {
-        return sharedPreferences.getString(MAP_APP_ID, AppUtil.MAPS_GOOGLE_MAP_APP_ID);
+        return sharedPreferences.getString(MAP_APP_ID, NavigationUtil.MAPS_GOOGLE_MAP_APP_ID);
     }
 
     public void saveMapAppId(String appId) {

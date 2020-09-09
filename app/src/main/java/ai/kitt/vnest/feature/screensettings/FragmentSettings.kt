@@ -7,8 +7,7 @@ import ai.kitt.vnest.basedata.database.sharepreference.VnestSharePreference
 import ai.kitt.vnest.databinding.FragmentSettingsBinding
 import ai.kitt.vnest.feature.screensettings.enterbks.FragmentEnterBks
 import ai.kitt.vnest.feature.screensettings.selectmaps.FragmentSelectMaps
-import ai.kitt.vnest.util.AppUtil
-import ai.kitt.vnest.util.ConfirmDialog
+import ai.kitt.vnest.util.NavigationUtil
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,8 +40,8 @@ class FragmentSettings : BaseFragment(R.layout.fragment_settings) {
 
     override fun initView(view: View) {
         binding.maps.detailText = when (mapDef) {
-            AppUtil.MAPS_NATIVEL_APP_ID -> getString(R.string.maps_navitel_app_name)
-            AppUtil.MAPS_VIET_MAP_APP_ID -> getString(R.string.maps_viet_map_app_name)
+            NavigationUtil.MAPS_NATIVEL_APP_ID -> getString(R.string.maps_navitel_app_name)
+            NavigationUtil.MAPS_VIET_MAP_APP_ID -> getString(R.string.maps_viet_map_app_name)
             else -> getString(R.string.google_map_app_name)
         }
     }
@@ -75,8 +74,8 @@ class FragmentSettings : BaseFragment(R.layout.fragment_settings) {
 
     private fun setSelectedMaps() {
         binding.maps.detailText = when (VnestSharePreference.getInstance(requireContext()).mapAppId) {
-            AppUtil.MAPS_NATIVEL_APP_ID -> getString(R.string.maps_navitel_app_name)
-            AppUtil.MAPS_GOOGLE_MAP_APP_ID -> getString(R.string.google_map_app_name)
+            NavigationUtil.MAPS_NATIVEL_APP_ID -> getString(R.string.maps_navitel_app_name)
+            NavigationUtil.MAPS_GOOGLE_MAP_APP_ID -> getString(R.string.google_map_app_name)
             else -> getString(R.string.maps_viet_map_app_name)
         }
     }
