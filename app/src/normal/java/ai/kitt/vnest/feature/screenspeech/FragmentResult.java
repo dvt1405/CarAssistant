@@ -2,6 +2,7 @@ package ai.kitt.vnest.feature.screenspeech;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,17 +46,21 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import ai.kitt.snowboy.service.TriggerOfflineService;
 import ai.kitt.vnest.App;
 import ai.kitt.vnest.R;
+import ai.kitt.vnest.databinding.FragmentResultBinding;
 import ai.kitt.vnest.feature.activitymain.MainActivity;
 import ai.kitt.vnest.feature.activitymain.ViewModel;
 import ai.kitt.vnest.feature.screenspeech.adapters.AdapterAssistantMessage;
 import ai.kitt.vnest.feature.screenspeech.model.ItemAssistant;
 import ai.kitt.vnest.feature.screenspeech.model.ItemListResult;
 import ai.kitt.vnest.feature.screenspeech.model.ResultItem;
+import ai.kitt.vnest.util.ConfirmDialog;
+import roxwin.tun.baseui.dialog.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -68,6 +74,7 @@ public class FragmentResult extends Fragment {
     public final static int STOP_SPEECH_TIME_COUNT = 103;
     private static int MAX_SPEECH_TIME_OUT = 20;
 
+    private FragmentResultBinding binding;
     private int speechCountTime = MAX_SPEECH_TIME_OUT;
     private RecyclerView mListResult;
     private AdapterAssistantMessage adapter;
@@ -81,6 +88,10 @@ public class FragmentResult extends Fragment {
     private ExoPlayer exoPlayer;
     private TrackSelector trackSelector;
     private ImageView btnClosePlayerView;
+
+    private ConfirmDialog deleteDialog;
+    private ProgressDialog progressDialog;
+
     public Handler timer = new Handler();
     public Runnable timerSpeech = this::notifySpeechTimeOut;
     public Handler handlerSpeechRecordTimeManager = new Handler(Looper.getMainLooper()) {
@@ -90,7 +101,7 @@ public class FragmentResult extends Fragment {
             switch (msg.what) {
                 case SPEECH_TIME_OUT:
                     if (isPlayingRecognition) {
-                        viewModel.getLiveDataStartRecord().postValue(false);
+                        viewModel.stopRecord();
                         getMainActivity().getTextToSpeech().speak("Xin lỗi, không thể phát hiện giọng nói của bạn!", false);
                     }
                     break;
@@ -115,8 +126,8 @@ public class FragmentResult extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_result, container, false);
-        return view;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -150,11 +161,13 @@ public class FragmentResult extends Fragment {
         setupToolbar();
         initRecognitionProgressView();
     }
-    public void setupToolbar() {
-        ((AppCompatActivity)requireActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(requireContext(),R.drawable.ic_round_arrow_back_24));
 
+    public void setupToolbar() {
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(requireContext(), R.drawable.ic_round_arrow_back_24));
+
+        binding.deleteLayout.setOnClickListener(v -> showDeleteDialog());
     }
 
     public void intAction(View view) {
@@ -208,7 +221,7 @@ public class FragmentResult extends Fragment {
             } else {
                 finishRecognition();
             }
-            viewModel.getLiveDataStartRecord().postValue(null);
+            viewModel.resetRecordState();
         });
         mediaSourceFactory = new DefaultDataSourceFactory(requireContext(), Util.getUserAgent(requireContext(), "vnest"));
 
@@ -249,6 +262,30 @@ public class FragmentResult extends Fragment {
         recognitionProgressView.setRotationRadiusInDp(0); // kich thuoc vong quay cua cham tron
         recognitionProgressView.play();
 
+    }
+
+
+    private void showDeleteDialog() {
+        showProgress();
+        if (deleteDialog == null) {
+            deleteDialog = new ConfirmDialog.Builder(requireContext(), true)
+                    .title(getString(R.string.delete_history_alert_title))
+                    .message(getString(R.string.delete_history_alert_message))
+                    .setOnAllowClick(dialog -> viewModel.deleteMessages(() -> {
+                        progressDialog.dismiss();
+                        adapter.deleteAll();
+                    }))
+                    .cancelTitle(getString(android.R.string.cancel))
+                    .build();
+        }
+        deleteDialog.show();
+    }
+
+    private void showProgress(){
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(requireContext(),false, Color.WHITE);
+        }
+        progressDialog.show();
     }
 
     @SuppressLint("LogNotTimber")
@@ -340,13 +377,13 @@ public class FragmentResult extends Fragment {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri videoUri = Uri.parse(url);
-            intent.setDataAndType( videoUri, "application/x-mpegURL" );
-            intent.setPackage( "com.mxtech.videoplayer.pro" );
-            if(intent.resolveActivity(requireContext().getPackageManager()) ==  null) {
-                intent.setPackage( "com.mxtech.videoplayer.ad" );
+            intent.setDataAndType(videoUri, "application/x-mpegURL");
+            intent.setPackage("com.mxtech.videoplayer.pro");
+            if (intent.resolveActivity(requireContext().getPackageManager()) == null) {
+                intent.setPackage("com.mxtech.videoplayer.ad");
             }
-            startActivity( intent );
-        }catch (Exception ex) {
+            startActivity(intent);
+        } catch (Exception ex) {
             toolbar.setVisibility(View.INVISIBLE);
             btnVoice.setVisibility(View.GONE);
             playerView.setVisibility(View.VISIBLE);
@@ -372,6 +409,7 @@ public class FragmentResult extends Fragment {
             return new DashMediaSource.Factory(dashChunkSourceFactory, manifestDataSourceFactory).createMediaSource(uri);
         }
     }
+
     @Override
     public void onDestroyView() {
         finishRecognition();

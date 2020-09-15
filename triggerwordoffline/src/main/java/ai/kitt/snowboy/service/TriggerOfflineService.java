@@ -6,7 +6,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,16 +41,16 @@ public class TriggerOfflineService extends Service {
 
 
     public static void startService(Context context, boolean isWakeUp) {
-        Intent intent = new Intent(context, TriggerOfflineService.class);
-        if (isWakeUp) {
-            isServiceRunning = true;
-            intent.putExtra(KEY_START, WAKE_UP);
-        }
-        try {
-            context.startService(intent);
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
-        }
+//        Intent intent = new Intent(context, TriggerOfflineService.class);
+//        if (isWakeUp) {
+//            isServiceRunning = true;
+//            intent.putExtra(KEY_START, WAKE_UP);
+//        }
+//        try {
+//            context.startService(intent);
+//        } catch (Exception e) {
+//            Log.e(TAG, e.getMessage(), e);
+//        }
     }
 
 
@@ -207,8 +206,5 @@ public class TriggerOfflineService extends Service {
         stopOfflineRecording();
         recordingThread = null;
         playbackThread = null;
-//        Intent intent = new Intent();
-//        intent.setAction(TriggerBroadCast.ACTION_RESTART_SERVICE);
-//        sendBroadcast(intent);
     }
 }

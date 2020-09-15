@@ -1,14 +1,12 @@
 package ai.kitt.vnest.speechmanager.speechonline
 
-import ai.kitt.vnest.feature.screenspeech.FragmentResult
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Message
 import android.speech.SpeechRecognizer
 import android.util.Log
 import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter
-import timber.log.Timber
 
-
+@SuppressLint("LogNotTimber")
 class SpeechRecognitionListener(
         private val mListener: OnResultReady,
         val callback: OnHandleSpeechError

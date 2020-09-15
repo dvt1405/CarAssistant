@@ -42,7 +42,7 @@ public class DialogUtils {
     }
 
     public static AlertDialog.Builder getConfirmDialog(Context context, String title, String message, boolean isShowCancelButton, OnConfirmListener onConfirmListener) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context)
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.Material_Alert_ThemeDefault)
                 .setTitle(title)
                 .setMessage(message);
         if (isShowCancelButton) {

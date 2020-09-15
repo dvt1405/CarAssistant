@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -18,10 +17,8 @@ import com.blankj.utilcode.util.IntentUtils;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import ai.kitt.vnest.R;
 import ai.kitt.vnest.basedata.database.sharepreference.VnestSharePreference;
 import ai.kitt.vnest.basedata.entity.Poi;
-import ai.kitt.vnest.feature.activitymain.MainActivity;
 import ai.kitt.vnest.receiver.OpenNavigationReceiver;
 
 @SuppressLint("All")
@@ -29,6 +26,7 @@ public class NavigationUtil {
     public static final String MAPS_NATIVEL_APP_ID = "com.navitel";
     public static final String MAPS_GOOGLE_MAP_APP_ID = "com.google.android.apps.maps";
     public static final String MAPS_VIET_MAP_APP_ID = "com.vietmap.s1OBU";
+
     public static Intent buildVietMapIntent(Poi paramAddress) {
         Intent intent = new Intent();
         intent.setAction("PAPAGO_BROADCAST_RECV");
@@ -50,8 +48,14 @@ public class NavigationUtil {
             context.sendBroadcast(buildVietMapIntent(poi));
         } else {
             AppUtils.launchApp(MAPS_VIET_MAP_APP_ID);
-            new Handler().postDelayed(() -> context.sendBroadcast(buildVietMapIntent(poi)), 5000);
-
+            context.sendBroadcast(new Intent());
+            try {
+                Intent vietMapBroadCast = new Intent(context, OpenNavigationReceiver.class);
+                vietMapBroadCast.putExtra(OpenNavigationReceiver.EXTRA_LOCATION, poi);
+                context.sendBroadcast(vietMapBroadCast);
+            } catch (Exception ex) {
+                LogUtil.log(ex);
+            }
         }
     }
 
@@ -117,7 +121,11 @@ public class NavigationUtil {
         if (intent.resolveActivity(context.getPackageManager()) == null) {
             intent.setPackage("com.google.android.youtube");
         }
-        context.startActivity(intent);
+        try{
+            context.startActivity(intent);
+        }catch (Exception ex) {
+            LogUtil.log(ex);
+        }
     }
 
     public static String getImei(Activity activity) {
@@ -127,6 +135,7 @@ public class NavigationUtil {
             return imei;
         } catch (Exception e) {
             Log.e("Error", e.getMessage(), e);
+            LogUtil.log(e);
         }
         return "";
     }

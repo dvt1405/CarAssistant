@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
- import ai.kitt.vnest.R;
+import ai.kitt.vnest.R;
 import ai.kitt.vnest.feature.screenspeech.model.ItemAssistant;
 import ai.kitt.vnest.feature.screenspeech.model.ItemListResult;
 import ai.kitt.vnest.feature.screenspeech.model.ResultItem;
@@ -30,6 +30,11 @@ public class AdapterAssistantMessage extends RecyclerView.Adapter<RecyclerView.V
 
     public void addItem(ResultItem resultItem) {
         mListItem.add(resultItem);
+        notifyDataSetChanged();
+    }
+
+    public void deleteAll() {
+        mListItem.clear();
         notifyDataSetChanged();
     }
 
@@ -118,7 +123,7 @@ public class AdapterAssistantMessage extends RecyclerView.Adapter<RecyclerView.V
             mRecyclerView.setAdapter(adapterResult);
             mRecyclerView.setLayoutManager(new GridLayoutManager(itemView.getContext(), itemView.getResources().getInteger(R.integer.list_result_span_count)));
             mRecyclerView.scrollToPosition(1);
-            itemView.setOnClickListener( view -> {
+            itemView.setOnClickListener(view -> {
 
             });
         }

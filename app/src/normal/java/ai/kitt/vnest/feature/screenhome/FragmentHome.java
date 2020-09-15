@@ -55,7 +55,7 @@ public class FragmentHome extends Fragment {
         viewModel.getMessage();
         btnListener.setOnClickListener(view1 -> {
             getMainActivity().startResultFragment();
-            viewModel.getLiveDataStartRecord().postValue(true);
+            viewModel.startRecord();
         });
 
         viewModel.getListMessLiveData().observe(getViewLifecycleOwner(), list -> {

@@ -89,7 +89,7 @@ abstract public class BaseFragmentResult extends BaseFragment {
             switch (msg.what) {
                 case SPEECH_TIME_OUT:
                     if (isPlayingRecognition) {
-                        viewModel.getLiveDataStartRecord().postValue(false);
+                        viewModel.stopRecord();
                         getMainActivity().getTextToSpeech().speak("Xin lỗi, không thể phát hiện giọng nói của bạn!", false);
                     }
                     break;
@@ -193,7 +193,7 @@ abstract public class BaseFragmentResult extends BaseFragment {
             } else {
                 finishRecognition();
             }
-            viewModel.getLiveDataStartRecord().postValue(null);
+            viewModel.resetRecordState();
         });
         mediaSourceFactory = new DefaultDataSourceFactory(requireContext(), Util.getUserAgent(requireContext(), "vnest"));
 
@@ -203,7 +203,7 @@ abstract public class BaseFragmentResult extends BaseFragment {
             if(aBoolean) {
                 setUpRecognitionsUi();
             }
-            viewModel.getLiveDataRebindRecognitionsView().postValue(null);
+            viewModel.resetRecordState();
         });
     }
     public abstract void onPoisResult();

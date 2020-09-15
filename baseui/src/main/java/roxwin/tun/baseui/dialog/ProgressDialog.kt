@@ -14,29 +14,32 @@ import kotlinx.android.synthetic.main.dialog_progress.view.*
 import roxwin.tun.baseui.R
 
 class ProgressDialog(private val context: Context, cancelable: Boolean) {
-    private val progressBar: ProgressBar by lazy {
+    private val progressBar: ProgressBar? by lazy {
         view.pg
     }
     private val view by lazy {
         LayoutInflater.from(context).inflate(R.layout.dialog_progress, null, false)
     }
 
+    private val progress: AlertDialog by lazy {
+        AlertDialog.Builder(context, R.style.waiting_dialog)
+                .setView(
+                        view
+                )
+                .setCancelable(cancelable)
+                .create()
+    }
+
     @SuppressLint("ResourceAsColor")
-    constructor(context: Context, cancelable: Boolean, @ColorRes color: Int) : this(
-        context,
-        cancelable
+    constructor(context: Context, cancelable: Boolean, color: Int) : this(
+            context,
+            cancelable
     ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            progressBar.indeterminateDrawable = ColorDrawable(context.getColor(color))
+            progressBar?.indeterminateDrawable = ColorDrawable(color)
         }
     }
 
-    private var progress: AlertDialog = AlertDialog.Builder(context, R.style.waiting_dialog)
-        .setView(
-            view
-        )
-        .setCancelable(cancelable)
-        .create()
 
     fun show() {
         progress.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

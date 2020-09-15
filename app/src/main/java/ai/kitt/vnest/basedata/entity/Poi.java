@@ -1,6 +1,9 @@
 package ai.kitt.vnest.basedata.entity;
 
-public class Poi {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Poi implements Parcelable {
     // private String is_promoted;
     private String img;
     // private String img_big;
@@ -20,6 +23,31 @@ public class Poi {
     private String hash;
     private String email;
     private double distance;
+
+    protected Poi(Parcel in) {
+        img = in.readString();
+        address = in.readString();
+        title = in.readString();
+        url = in.readString();
+        phone = in.readString();
+        category = in.readString();
+        brand = in.readString();
+        hash = in.readString();
+        email = in.readString();
+        distance = in.readDouble();
+    }
+
+    public static final Creator<Poi> CREATOR = new Creator<Poi>() {
+        @Override
+        public Poi createFromParcel(Parcel in) {
+            return new Poi(in);
+        }
+
+        @Override
+        public Poi[] newArray(int size) {
+            return new Poi[size];
+        }
+    };
 
     public String getImg() {
         return img;
@@ -107,5 +135,24 @@ public class Poi {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(img);
+        dest.writeString(address);
+        dest.writeString(title);
+        dest.writeString(url);
+        dest.writeString(phone);
+        dest.writeString(category);
+        dest.writeString(brand);
+        dest.writeString(hash);
+        dest.writeString(email);
+        dest.writeDouble(distance);
     }
 }

@@ -16,7 +16,8 @@
     <string name="alert_ok_button_title">OK</string>
     <string name="confirm_button_alert_title">Xác nhận</string>
     <string name="active_code_fail">Kích hoạt code không thành công!\nMời nhập lại!</string>
-    <string name="no_internet_connection">Kiểm tra kết nối mạng và thử lại!</string>
+    <string name="alert_no_internet_connection_message">Kiểm tra kết nối mạng và thử lại!</string>
+    <string name="alert_no_internet_connection_title">Mất kết nối mạng</string>
 
     <string name="map_items">Chọn bản đồ</string>
     <string name="bks_items">Biển kiểm soát</string>
@@ -31,7 +32,17 @@
     <string name="alert_enter_bks_title">Biển kiếm soát</string>
     <string name="alert_enter_bks_message">Mời bạn nhập biển kiểm soát</string>
     <string name="alert_app_no_installed">Ứng dụng chưa được cài đặt</string>
-    <string name="alert_app_no_installed_message">Ứng dụng di chuyển mặc định chưa được cài đặt!\nBạn muốn sử dụng GoogleMap?</string>
+    <string name="alert_app_no_installed_message">Ứng dụng di chuyển mặc định chưa được cài đặt!\nGoogleMap sẽ được tự động chọn sau 3s!</string>
+    <string name="check_car_ciolation_enter_capcha_title">Mời bạn nhập mã capcha!</string>
+    <string name="check_car_ciolation_fail">\"Đang gặp chút vấn đề! Mời kiểm tra lại\"</string>
+    <string name="open_vtv_can_not_find_link_title">Không tìm thấy VTV</string>
+    <string name="open_vtv_success_title">Đang mở VTV</string>
+    <string name="find_contact_fail_title">Không tìm thấy liên hệ!</string>
+    <string name="alert_enable_gps_message">Gps đang tắt có thể ảnh hưởng tới kết quả tìm kiểm!\nBạn có muốn bật GPS để tiếp tục?</string>
+    <string name="alert_enable_gps_title">GPS đang tắt</string>
+    <string name="delete_history_alert_title">Xóa lịch sử</string>
+    <string name="delete_history_alert_message">Bạn có muốn xóa lịch sử tìm kiếm?</string>
+    <string name="alert_app_not_installed">Ứng dụng chưa được cài đặt! Vui lòng cài đặt ứng dụng và thử lại sau!</string>
 </resources>
 <!--=======-->
 <!--    <string name="app_name">Vnest.CA</string>-->

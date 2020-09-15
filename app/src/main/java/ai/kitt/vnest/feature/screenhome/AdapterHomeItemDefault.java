@@ -19,12 +19,12 @@ public class AdapterHomeItemDefault extends RecyclerView.Adapter<RecyclerView.Vi
     private static final String[] defItems = {"Chỉ đường đến hồ hoàn kiếm",
             "Chỉ đường đến bến xe mỹ đình",
             "Mở bài hãy trao cho anh",
-            "Tìm ATM",
+            "Tìm ATM nông nghiệp gần đây",
             "Tìm quán ăn",
             "Tìm quán nước",
             "Xe anh có bị phạt nguội không",
             "Mở VTV3",
-            "Mở Video"};
+            "Mở Video sóng gió"};
 
     private ArrayList<String> defaultList = new ArrayList<>();
 

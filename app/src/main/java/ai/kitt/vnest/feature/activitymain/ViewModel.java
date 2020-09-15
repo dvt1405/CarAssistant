@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.blankj.utilcode.util.AppUtils;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import ai.api.model.AIResponse;
+import ai.kitt.vnest.base.BaseViewModel;
 import ai.kitt.vnest.basedata.api.model.ActiveCode;
 import ai.kitt.vnest.basedata.api.model.CarInfo;
 import ai.kitt.vnest.basedata.api.model.CarResponse;
@@ -31,13 +35,21 @@ import java.util.concurrent.TimeoutException;
 
 //import kun.kt.vtv.VtvFetchLinkStream;
 import ai.kitt.vnest.basedata.entity.Youtube;
+import ai.kitt.vnest.util.LogUtil;
 import ai.kitt.vnest.util.PhoneUtils;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import kun.kt.vtv.Stream;
 import kun.kt.vtv.VtvFetchLinkStream;
 import timber.log.Timber;
 
 @SuppressLint("LogNotTimber")
-public class ViewModel extends androidx.lifecycle.ViewModel {
+public class ViewModel extends BaseViewModel {
+
     private static final String LOG_TAG = "Main view model";
     private static final String KEY_SEARCH = "tìm";
 
@@ -76,7 +88,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         return liveDataRebindRecognitionsView;
     }
 
-    public MutableLiveData<Boolean> getLiveDataStartRecord() {
+    public LiveData<Boolean> getLiveDataStartRecord() {
         return liveDataStartRecord;
     }
 
@@ -95,9 +107,30 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                         .messageDao()
                         .insert(message);
             } catch (Exception e) {
-                Timber.e(e);
+                LogUtil.log(e);
+                ;
             }
         }).start();
+    }
+
+    public void deleteMessages(DeleteHistoryListener listener) {
+        addDisposable(Completable.fromAction(VNestDB.getInstances(context)
+                .messageDao()::delete)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.single())
+                .subscribe(listener::onSuccess));
+    }
+
+    public void startRecord() {
+        liveDataStartRecord.postValue(true);
+    }
+
+    public void stopRecord() {
+        liveDataStartRecord.postValue(false);
+    }
+
+    public void resetRecordState() {
+        liveDataStartRecord.postValue(null);
     }
 
     public void getMessage() {
@@ -186,7 +219,8 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                     if (ex instanceof NullPointerException) {
                         onCallListener.onCallError(ex);
                     }
-                    Timber.e(ex);
+                    LogUtil.log(ex);
+                    ;
                 }
             });
         }
@@ -254,11 +288,12 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                         onSearchPlacesListener.onOpenMapToPoi(poiArrayList.get(0));
                     } catch (Exception e) {
                         onSearchPlacesListener.onSearchPlacesNoDataFound();
-                        Log.e("Error",e.getMessage(),e);
+                        LogUtil.log(e);
+                        Log.e("Error", e.getMessage(), e);
+
                     }
                 } else {
                     onSearchPlacesListener.onSelectPlacesToNavigate(poiArrayList);
-
                 }
 
 
@@ -267,7 +302,8 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                 onSearchPlacesListener.onOpenMapToPoi(poi);
             }
         } catch (Exception e) {
-            Log.e("Error",e.getMessage(),e);
+            LogUtil.log(e);
+            Log.e("Error", e.getMessage(), e);
         }
 
     }
@@ -313,9 +349,28 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
             }
         } catch (Exception ex) {
             Log.e("Error", ex.getMessage(), ex);
+            LogUtil.log(ex);
             listener.onCheckCarViolationsFail();
         }
 
+    }
+    public void openApp(AIResponse aiResponse, String code,OnOpenAppListener listener) {
+        try {
+            String appId = aiResponse.getResult().getParameters().get("AppId").getAsString();
+            if(AppUtils.isAppInstalled(appId)) {
+                listener.onReceivedAppId(appId);
+            } else {
+                listener.onAppNotInstalled();
+            }
+        }catch (Exception ex) {
+            listener.onOpenAppError(ex);
+        }
+    }
+
+    public interface OnOpenAppListener{
+        void onReceivedAppId(String appId);
+        void onOpenAppError(Exception ex);
+        void onAppNotInstalled();
     }
 
     public interface OnCallListener {
@@ -372,5 +427,9 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         void onAskCarLicensePlates(String speech);
 
         void onCheckCarViolationsFail();
+    }
+
+    public interface DeleteHistoryListener {
+        void onSuccess();
     }
 }

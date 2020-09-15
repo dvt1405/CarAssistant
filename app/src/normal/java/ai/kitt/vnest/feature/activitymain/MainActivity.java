@@ -112,7 +112,7 @@ public class MainActivity extends BaseMainActivity {
                             break;
                     }
                     if (textSpeech != null) {
-                        viewModel.getLiveDataStartRecord().postValue(false);
+                        viewModel.stopRecord();
                         sendMessage(textSpeech, true);
                         processing_text(textSpeech, true);
                         startResultFragment();
@@ -169,7 +169,7 @@ public class MainActivity extends BaseMainActivity {
         });
         adapter.setItemClickListener((position, name) -> {
             startResultFragment();
-            viewModel.getLiveDataStartRecord().postValue(false);
+            viewModel.stopRecord();
             contexts = null;
             sendMessage(name, true);
             processing_text(name, true);

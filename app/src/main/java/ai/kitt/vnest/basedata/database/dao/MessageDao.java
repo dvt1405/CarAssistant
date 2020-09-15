@@ -5,9 +5,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import ai.kitt.vnest.basedata.entity.Message;
-
 import java.util.List;
+
+import ai.kitt.vnest.basedata.entity.Message;
 
 @Dao
 public interface MessageDao {
@@ -19,4 +19,8 @@ public interface MessageDao {
 
     @Delete
     void delete(Message... messages);
+
+    @Query("DELETE FROM Message")
+    void delete() ;
+
 }

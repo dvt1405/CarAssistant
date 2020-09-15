@@ -6,13 +6,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.Uri;
@@ -29,13 +25,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
@@ -63,6 +59,7 @@ import ai.kitt.snowboy.service.TriggerBroadCast;
 import ai.kitt.vnest.App;
 import ai.kitt.vnest.BuildConfig;
 import ai.kitt.vnest.R;
+import ai.kitt.vnest.base.LocationActivity;
 import ai.kitt.vnest.basedata.api.model.ActiveCode;
 import ai.kitt.vnest.basedata.api.model.ActiveResponse;
 import ai.kitt.vnest.basedata.api.model.CarResponse;
@@ -84,6 +81,8 @@ import ai.kitt.vnest.receiver.OpenNavigationReceiver;
 import ai.kitt.vnest.speechmanager.speechonline.OnResultReady;
 import ai.kitt.vnest.speechmanager.speechonline.SpeechRecognizerManager;
 import ai.kitt.vnest.speechmanager.texttospeech.TextToSpeechManager;
+import ai.kitt.vnest.util.AppUtil;
+import ai.kitt.vnest.util.LogUtil;
 import ai.kitt.vnest.util.NavigationUtil;
 import ai.kitt.vnest.util.ConfirmDialog;
 import ai.kitt.vnest.util.DialogActiveControl;
@@ -92,9 +91,11 @@ import kun.ktupdatelibrary.DownLoadBroadCast;
 import kun.ktupdatelibrary.UpdateChecker;
 import timber.log.Timber;
 
-public abstract class BaseMainActivity extends AppCompatActivity implements LocationListener, TextToSpeechManager.TextToSpeechListener, ViewModel.OnOpenVtvListener,
+@SuppressLint("LogNotTimber")
+
+public abstract class BaseMainActivity extends LocationActivity implements TextToSpeechManager.TextToSpeechListener, ViewModel.OnOpenVtvListener,
         ViewModel.OnCallListener, ViewModel.OnSearchMp3Listener, ActiveRepo.ActiveListener, ViewModel.OnSearchYoutubeListener, ViewModel.OnSearchPlacesListener,
-        ViewModel.OnOtherSearchListener, ViewModel.CheckCarViolationsListener {
+        ViewModel.OnOtherSearchListener, ViewModel.CheckCarViolationsListener,ViewModel.OnOpenAppListener {
     protected static int callDeviceInfoTimes = 0;
     protected static final String LOG_TAG = "VNest";
     protected static final int REQUEST_PERMISSION_CODE = 101;
@@ -170,6 +171,11 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
      **/
     protected static final String ACTION_CHECK_CAR_VIOLATIONS = "TRACUUPHATNGUOI";
 
+    /**
+     * Open App
+     **/
+    protected static final String ACTION_OPEN_APP = "OpenApp";
+
     protected String[] permissions = {Manifest.permission.INTERNET,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CALL_PHONE,
@@ -192,12 +198,10 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     protected List<AIOutputContext> contexts;
     public TextToSpeechManager textToSpeech;
     protected String deviceId;
-    protected double latitude, longitude;
     public SpeechRecognizer speechRecognizer;
     public SpeechRecognizerManager speechRecognizerManager;
     protected ProgressDialog downloadDialog;
     protected OpenWeatherMapHelper weather;
-    protected LocationManager locationManager;
     protected AIService aiService;
     protected boolean notchangesessionid = false;
     protected String currentSessionId;
@@ -224,11 +228,17 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(ViewModel.class);
+        LogUtil.log("Test");
         if (checkPermission()) {
             initIfPermissionGranted();
         } else {
             requestPermission();
         }
+    }
+
+    @Override
+    public void onProviderDisabled(@org.jetbrains.annotations.Nullable String s) {
+        super.onProviderDisabled(s);
     }
 
     @Override
@@ -256,13 +266,12 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         sendCarInfo();
         initSpeechRecognizerManager();
         viewModel.getLiveDataUpdateResponse().observe(this, this::updateApp);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
+        getLastLocation();
+        requestLocationUpdate();
         initTextToSpeech();
     }
 
@@ -311,7 +320,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                         if (mDrawerLayout != null) {
                             mDrawerLayout.closeDrawer(Gravity.LEFT);
                         }
-                        viewModel.getLiveDataStartRecord().postValue(false);
+                        viewModel.stopRecord();
                         Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentSettings.TAG);
                         if (fragment == null) {
                             getSupportFragmentManager().beginTransaction()
@@ -325,7 +334,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                         break;
                 }
                 if (textSpeech != null) {
-                    viewModel.getLiveDataStartRecord().postValue(false);
+                    viewModel.stopRecord();
                     sendMessage(textSpeech, true);
                     processing_text(textSpeech, true);
                     startResultFragment();
@@ -426,8 +435,8 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         }, new SpeechRecognizerManager.SpeechRecognizerManagerCallBack() {
             @Override
             public void onNoNetWork() {
-                viewModel.getLiveDataStartRecord().postValue(false);
-                textToSpeech.speak(getString(R.string.no_internet_connection), false);
+                viewModel.stopRecord();
+                textToSpeech.speak(getString(R.string.alert_no_internet_connection_message), false);
             }
 
             @Override
@@ -462,7 +471,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
             try {
                 AIRequest aiRequest = new AIRequest(text);
                 if (!notchangesessionid || currentSessionId == null) {
-                    currentSessionId = deviceId + "#" + latitude + "-" + longitude;
+                    currentSessionId = deviceId + "#" + getLatitude() + "-" + getLongitude();
                 }
                 aiRequest.setSessionId(currentSessionId);
                 long currentProcessTime = System.currentTimeMillis();
@@ -522,6 +531,9 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                         case ACTION_CHECK_CAR_VIOLATIONS:
                             viewModel.checkCarViolations(aiRes, code, this);
                             break;
+                        case ACTION_OPEN_APP:
+                            viewModel.openApp(aiRes, code, this);
+                            break;
                         case INPUT_UN_KNOW:
                             searchInputUnknown(aiRes);
                             break;
@@ -555,6 +567,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                 isExcecuteText = false;
             }
         });
+
         thread.start();
     }
 
@@ -567,7 +580,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         progressDialog.setMessage("please waiting....");
         progressDialog.show();
 
-        weather.getCurrentWeatherByGeoCoordinates(latitude, longitude, new CurrentWeatherCallback() {
+        weather.getCurrentWeatherByGeoCoordinates(getLatitude(), getLongitude(), new CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
 
@@ -722,7 +735,8 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                         .setOnDismissListener(dialog -> {
                             sendCarInfo();
                         })
-                        .message(getString(R.string.no_internet_connection))
+                        .title(getString(R.string.alert_no_internet_connection_title))
+                        .message(getString(R.string.alert_no_internet_connection_message))
                         .build();
             }
             noNetworkDialog.show();
@@ -745,7 +759,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
             activeApp();
         } else {
             startResultFragment();
-            viewModel.getLiveDataStartRecord().postValue(true);
+            startRecordWhileGpsEnabled();
         }
     }
 
@@ -799,40 +813,16 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         super.onUserLeaveHint();
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        if (location != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
-
-        Log.e("onLocationChanged", latitude + " " + longitude);
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 
     @Override
     public void onRestartVoice() {
-        viewModel.getLiveDataStartRecord().postValue(true);
+        viewModel.startRecord();
 
     }
 
     @Override
     public void onStopVoiceRecord() {
-        viewModel.getLiveDataStartRecord().postValue(false);
+        viewModel.stopRecord();
 
     }
 
@@ -844,15 +834,16 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onGetVtvLinkSuccess(int chanel) {
-        sendMessage("Đang mở VTV" + chanel + "...", false);
+        sendMessage(getString(R.string.open_vtv_success_title) + chanel + "...", false);
         startResultFragment();
         resetContext();
     }
 
     @Override
     public void onNoVtvLinkFound(int chanel) {
-        sendMessage("Không tìm thấy VTV" + chanel, false);
-        speak("Không tìm thấy VTV" + chanel, false);
+        String text = getString(R.string.open_vtv_can_not_find_link_title);
+        sendMessage(text + chanel, false);
+        speak(text + chanel, false);
     }
 
     @Override
@@ -869,7 +860,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onCallError(Exception ex) {
-        String message = "Không tìm thấy liên hệ!";
+        String message = getString(R.string.find_contact_fail_title);
         sendMessage(message, false);
         speak(message, false);
     }
@@ -915,7 +906,9 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                 App.isActivated = true;
                 dialogActiveControl.dismiss();
                 startResultFragment();
-                viewModel.getLiveDataStartRecord().postValue(true);
+                if (isLocationEnabled()) {
+                    viewModel.startRecord();
+                }
             }
         }
     }
@@ -996,7 +989,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
     @Override
     public void onSearchNearestSuccess(String location) {
         sendMessage("Tìm " + location + "gần nhất", false);
-        NavigationUtil.displayLocationToMap(location, this);
+        NavigationUtil.navigationToLocation(location, this);
         resetContext();
     }
 
@@ -1011,7 +1004,7 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onCheckCarViolationsSuccess(String url) {
-        String text = "Mời bạn nhập mã capcha!";
+        String text = getString(R.string.check_car_ciolation_enter_capcha_title);
         sendMessage(text, false);
         speak(text, false);
         startWebViewFragment(url);
@@ -1019,14 +1012,32 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onCheckCarViolationsFail() {
-        sendMessage("Đang gặp chút vấn đề! Mời kiểm tra lại", false);
-        speak("Đang gặp chút vấn đề! Mời kiểm tra lại", false);
+        String text = getString(R.string.check_car_ciolation_fail);
+        sendMessage(text, false);
+        speak(text, false);
     }
 
     @Override
     public void onAskCarLicensePlates(String speech) {
         sendMessage(speech, false);
         speak(speech, true);
+    }
+
+    @Override
+    public void onReceivedAppId(String appId) {
+        AppUtils.launchApp(appId);
+    }
+
+    @Override
+    public void onOpenAppError(Exception ex) {
+        LogUtil.log(ex);
+    }
+
+    @Override
+    public void onAppNotInstalled() {
+        String text = getString(R.string.alert_app_not_installed);
+        sendMessage(text,false);
+        speak(text,false);
     }
 
     @Override
@@ -1039,8 +1050,18 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
         if (checkPermission()) {
             if (NavigationUtil.checkInternetConnection(this) && App.isActivated) {
                 startResultFragment();
-                viewModel.getLiveDataStartRecord().postValue(true);
+                startRecordWhileGpsEnabled();
             }
+        }
+    }
+
+    protected void startRecordWhileGpsEnabled() {
+        if (isLocationEnabled()) {
+            viewModel.startRecord();
+            dismissMessageNoGps();
+        } else {
+            viewModel.stopRecord();
+            buildAlertMessageNoGps();
         }
     }
 
@@ -1050,14 +1071,9 @@ public abstract class BaseMainActivity extends AppCompatActivity implements Loca
                 @Override
                 public void onActionTurnOn() {
                     if (App.isActivated) {
-//                        Fragment fragment = getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1);
-//                        while (fragment instanceof FragmentResult) {
-//                            getSupportFragmentManager().popBackStack();
-//                            fragment = getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1);
-//                        }
                         startResultFragment();
                         viewModel.getLiveDataOpenVTV().postValue("-1");
-                        viewModel.getLiveDataStartRecord().postValue(true);
+                        viewModel.startRecord();
                     }
                 }
 

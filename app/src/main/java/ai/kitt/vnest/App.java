@@ -3,19 +3,13 @@ package ai.kitt.vnest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 
 import ai.kitt.snowboy.service.TriggerBroadCast;
 import ai.kitt.snowboy.service.TriggerOfflineService;
 import ai.kitt.vnest.feature.activitymain.MainActivity;
-import kun.kt.opencam.air.AirControl;
-import kun.kt.opencam.ipc.ITransitService;
 
 @SuppressLint("LogNotTimber")
 public class App extends Application implements Application.ActivityLifecycleCallbacks {
@@ -23,7 +17,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
     public static final String AIR_PACKAGE_NAME = "com.tpms3";
 //    public static boolean isActivated = false;
     public static boolean isActivated = false;
-    public static boolean isForTest = false;
+    public static boolean isForTest = true;
     private int activityReferences = 0;
     public boolean isInBackground = false;
 
@@ -41,50 +35,6 @@ public class App extends Application implements Application.ActivityLifecycleCal
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
-    }
-
-    public static ITransitService ipcService;
-    private static ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            ipcService = ITransitService.Stub.asInterface(service);
-            AirControl.initialize(ipcService);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
-
-    public void bindService() {
-        Intent intent = new Intent("com.syu.sha.TransitService");
-        intent.setPackage("kun.kt.opencam");
-        App.get().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    public void open(String packageName, String className) {
-        try {
-            Intent intent;
-            if (className == null || className.isEmpty()) {
-                intent = getPackageManager().getLaunchIntentForPackage(packageName);
-            } else {
-                intent = new Intent();
-                intent.setComponent(new ComponentName(packageName, className));
-            }
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void closeApp(String packageName) {
-        try {
-            ipcService.closeApp(packageName);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     @Override
@@ -123,7 +73,6 @@ public class App extends Application implements Application.ActivityLifecycleCal
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
 
     }
-
 
     @Override
     public void onActivityDestroyed(Activity activity) {

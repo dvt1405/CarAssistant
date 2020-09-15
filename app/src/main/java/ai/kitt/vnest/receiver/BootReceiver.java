@@ -3,11 +3,9 @@ package ai.kitt.vnest.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import ai.kitt.snowboy.service.TriggerBroadCast;
 import ai.kitt.snowboy.service.TriggerOfflineService;
-import ai.kitt.vnest.feature.activitymain.MainActivity;
+import ai.kitt.vnest.util.LogUtil;
 
 public class BootReceiver extends BroadcastReceiver {
     @Override
@@ -16,6 +14,7 @@ public class BootReceiver extends BroadcastReceiver {
         assert action != null;
         if(action.equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
             TriggerOfflineService.startService(context,true);
+            LogUtil.log("Boot complete");
         }
     }
 }

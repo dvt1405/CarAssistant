@@ -81,7 +81,7 @@ public class AdapterAddressResult extends RecyclerView.Adapter<RecyclerView.View
                     itemName.setHeight(0);
                 }
                 itemView.setOnClickListener(view1 -> {
-                    NavigationUtil.displayPointToMap(poi, itemView.getContext());
+                    NavigationUtil.navigationToPoint(poi, itemView.getContext());
                 });
                 if(poi.getImg() !=null && !poi.getImg().trim().isEmpty()){
                     GlideApp.with(itemView)
@@ -96,7 +96,7 @@ public class AdapterAddressResult extends RecyclerView.Adapter<RecyclerView.View
 
                 itemName.setText((poi.getTitle()!=null ? poi.getTitle() : "" ));
                 itemName.setSelected(true);
-                itemAddress.setText((poi.getAddress() == null) ? poi.getAddress() : "");
+                itemAddress.setText((poi.getAddress() != null) ? poi.getAddress() : "");
                 imageView.setClipToOutline(true);
                 itemDistance.setText(((int) poi.getDistance()) + "m");
             } catch (Exception e) {
