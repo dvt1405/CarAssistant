@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import ai.kitt.vnest.R;
 
 public class ConfirmDialog {
-    private AlertDialog alertDialog;
+    public AlertDialog alertDialog;
 
     public ConfirmDialog(AlertDialog alertDialog) {
         this.alertDialog = alertDialog;
